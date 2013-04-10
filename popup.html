@@ -1,1 +1,114 @@
-<!DOCTYPE html><html><head><style>body{-webkit-user-select:none;margin:0;padding:0;font-size:13px;color:#444;font-family:微软雅黑,黑体,宋体;overflow-x:hidden;background:#fafafa}#s{padding:8px 15px;background:#666;color:#eee;font-weight:bold;width:380px}#s input{width:300px;height:9px;line-height:9px;font-size:9px;padding:6px 5px;border:1px solid #ddd;border-radius:3px;background:#fff;color:#222}#r{padding:5px 0;background:f5f5f5;width:400px}#t{color:#666;padding:10px 15px}#r a,#r a:visited{padding:2px 15px;color:#421;display:block;text-decoration:none;font-size:13px;line-height:24px;border-top:1px solid #fafafa;border-bottom:1px solid #fafafa;background:#fafafa;max-width:370px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#r a.o{background:#f8f8f8}#r a:hover,#r a:active{color:#921;border-top:1px dotted #ddd;border-bottom:1px dotted #ddd;background:#eee}#p{padding:2px 10px;background:#f2f2f2;border:dotted 1px #ddd;width:400px}#p a,#p a.visited{padding:0 2px;cursor:pointer;color:#666;text-decoration:none}#p a:hover,#p a.active{color:#444;text-decoration:underline}#p span{color:#666;padding:0 3px}</style><script>var $b=chrome.bookmarks,$bkg=chrome.extension.getBackgroundPage(),ipp=15,cp,am,pc,pis,r,sw=function(p){cp=p;pis.innerHTML=[cp,"/",pc].join('');var e=[],o=0;e.p=e.push;for(var i=(cp-1)*ipp,l=cp*ipp<am.length?cp*ipp:am.length;i<l;++i){e.p("<a target='_blank' href='");e.p(am[i].url);e.p("' title='");e.p(am[i].title);if(o)e.p("' class='o'>");else e.p("'>");o=!o;e.p(am[i].title);e.p("</a>")}r.innerHTML=e.join('')},s=function(k){r.innerHTML="<div id='t'>载入中...</div>";var cas=function(m){if(!m.length){r.innerHTML="<div id='t'>没有找到。</div>"}else{for(var i=0,l=m.length;i<l;++i){m[i].v=$bkg.getValue(m[i].url)}m.sort(function(a,b){return b.v-a.v});am=m;pc=Math.ceil(m.length/ipp);sw(1)}};if(!k||k==""){var m=[],f=1,abtn=function(ns){var sw=f;f=0;for(var i=0,l=ns.length;i<l;++i){var n=ns[i];if(n.url==null){abtn(n.children)}else{m.push(n)}}if(sw){cas(m)}};$b.getTree(abtn)} else{$b.search(k,function(m){cas(m)})}},t=document;t.t=t.getElementById;t.addEventListener('DOMContentLoaded',function(){pis=t.t("pi");r=t.t("r");t.t("pr").addEventListener("click",function(){if(cp>1){sw(cp-1)}});t.t("nt").addEventListener("click",function(){if(cp<pc){sw(cp+1)}});var lk=null,sk=t.t("sk"),_s=function(){var k=sk.value;if(k!=lk){lk=k;s(k)}};sk.t=sk.addEventListener;sk.t("keydown",_s);sk.t("keyup",_s);sk.t("change",_s);s("")});</script></head><body><div id="s">搜索：<input id="sk"/></div><div id="r"></div><div id="p"><span id="pi"></span><a id="pr">上页</a><a id="nt">下页</a></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <style type="text/css">
+            body
+            {
+                -webkit-user-select : none;
+                margin : 0;
+                padding : 0;
+                font-size : 13px;
+                color : #444;
+                font-family : 微软雅黑,黑体,宋体;
+                overflow-x : hidden;
+                background : #fafafa;
+            }
+            #search
+            {
+                padding : 8px 15px;
+                background : #666;
+                color : #eee;
+                font-weight : bold;
+                width : 380px;
+            }
+            #search input
+            {
+                width : 300px;
+                height : 9px;
+                line-height : 9px;
+                font-size : 9px;
+                padding : 6px 5px;
+                border : 1px solid #ddd;
+                border-radius : 3px;
+                background : #fff;
+                color : #222;
+            }
+            #result
+            {
+                padding : 5px 0;
+                background : f5f5f5;
+                width : 400px;
+            }
+            #result .tip
+            {
+                color : #666;
+                padding : 10px 15px;
+            }
+            #result a, #result a:visited
+            {
+                padding : 2px 15px;
+                color : #421;
+                display : block;
+                text-decoration : none;
+                font-size : 13px;
+                line-height : 24px;
+                border-top : 1px solid #fafafa;
+                border-bottom : 1px solid #fafafa;
+                background : #fafafa;
+                
+                max-width : 370px;
+                white-space : nowrap;
+                overflow : hidden;
+                text-overflow : ellipsis;
+            }
+            #result a.odd
+            {
+                background : #f8f8f8;
+            }
+            #result a:hover, #result a:active
+            {
+                color : #921;
+                border-top : 1px dotted #ddd;
+                border-bottom : 1px dotted #ddd;
+                background : #eee;
+            }
+            #pager
+            {
+                padding : 2px 10px;
+                background : #f2f2f2;
+                border : dotted 1px #ddd;
+                width : 400px;
+            }
+            #pager a, #pager a.visited
+            {
+                padding : 0 2px;
+                cursor : pointer;
+                color : #666;
+                text-decoration : none;
+            }
+            #pager a:hover, #pager a.active
+            {
+                color : #444;
+                text-decoration : underline;
+            }
+            #pager span
+            {
+                color : #666;
+                padding : 0 3px;
+            }
+        </style>
+        <script type="text/javascript" src="popup.js"></script>
+    </head>
+    <body>
+        <div id="search">
+            搜索：<input id="search_key" />
+        </div>
+        <div id="result">
+        </div>
+        <div id="pager">
+             <span id="pager_info"></span>
+             <a id="prev">上页</a>
+             <a id="next">下页</a>
+        </div>
+    </body>
+</html>
