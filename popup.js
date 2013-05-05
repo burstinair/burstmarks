@@ -2,8 +2,13 @@ var $b = chrome.bookmarks;
 var $bkg = chrome.extension.getBackgroundPage();
 var item_per_page = 15;
 var cur_page, all_marks, page_count, page_info_span, result;
+var search_key;
 var selected_result = null;
 var cur_results = [];
+
+var show_tip_on = function (result) {
+    
+};
 
 var select = function (cur_select) {
     if(selected_result != null) {
@@ -11,6 +16,11 @@ var select = function (cur_select) {
     }
     cur_select.classList.add("select");
     selected_result = cur_select;
+    /*setTimeout(function () {
+        if(cur_select == selected_result) {
+            show_tip_on(cur_select);
+        }
+    }, 1200);*/
 };
 
 var select_up = function () {
@@ -29,7 +39,7 @@ var select_down = function () {
     }
 };
 
-var enable_select = function () {
+var enable_select_and_tip = function () {
     var collection = document.getElementById('result').children;
     cur_results = [];
     for(var i = 0, l = collection.length; i < l; ++i) {
@@ -49,7 +59,6 @@ document.addEventListener('keydown', function (e) {
         select_down();
     } else if(e.keyCode == 13) {
         if(selected_result != null) {
-            //selected_result.focus();
             window.open(selected_result.attributes["href"].value);
         }
     }
@@ -76,7 +85,7 @@ var show = function (page) {
         res.push("</a>");
     }
     result.innerHTML = res.join('');
-    enable_select();
+    enable_select_and_tip();
 };
 
 //search
@@ -137,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     var last_key = '';
-    var search_key = document.getElementById("search_key");
+    search_key = document.getElementById("search_key");
     var _search = function () {
         var key = search_key.value;
         if(key != last_key) {
@@ -149,5 +158,9 @@ document.addEventListener('DOMContentLoaded', function () {
     search_key.addEventListener("keyup", _search);
     search_key.addEventListener("change", _search);
     search("");
+    search_key.focus();
+});
+
+document.addEventListener('click', function () {
     search_key.focus();
 });
