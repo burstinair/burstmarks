@@ -2,6 +2,59 @@ var $b = chrome.bookmarks;
 var $bkg = chrome.extension.getBackgroundPage();
 var item_per_page = 15;
 var cur_page, all_marks, page_count, page_info_span, result;
+var selected_result = null;
+var cur_results = [];
+
+var select = function (cur_select) {
+    if(selected_result != null) {
+        selected_result.classList.remove("select");
+    }
+    cur_select.classList.add("select");
+    selected_result = cur_select;
+};
+
+var select_up = function () {
+    if(selected_result == null || cur_results.indexOf(selected_result) == 0) {
+        select(cur_results[cur_results.length - 1]);
+    } else {
+        select(cur_results[cur_results.indexOf(selected_result) - 1]);
+    }
+};
+
+var select_down = function () {
+    if(selected_result == null || cur_results.indexOf(selected_result) == cur_results.length - 1) {
+        select(cur_results[0]);
+    } else {
+        select(cur_results[cur_results.indexOf(selected_result) + 1]);
+    }
+};
+
+var enable_select = function () {
+    var collection = document.getElementById('result').children;
+    cur_results = [];
+    for(var i = 0, l = collection.length; i < l; ++i) {
+        if(collection[i].tagName.toLowerCase() == 'a') {
+            cur_results.push(collection[i]);
+            collection[i].addEventListener('mouseover', function () {
+                select(this);
+            });
+        }
+    }
+};
+
+document.addEventListener('keydown', function (e) {
+    if(e.keyCode == 38) {
+        select_up();
+    } else if(e.keyCode == 40) {
+        select_down();
+    } else if(e.keyCode == 13) {
+        if(selected_result != null) {
+            //selected_result.focus();
+            window.open(selected_result.attributes["href"].value);
+        }
+    }
+});
+
 var show = function (page) {
     cur_page = page;
     page_info_span.innerHTML = [cur_page, "/", page_count].join('');
@@ -23,7 +76,8 @@ var show = function (page) {
         res.push("</a>");
     }
     result.innerHTML = res.join('');
-}
+    enable_select();
+};
 
 //search
 var search = function (key) {
@@ -95,4 +149,5 @@ document.addEventListener('DOMContentLoaded', function () {
     search_key.addEventListener("keyup", _search);
     search_key.addEventListener("change", _search);
     search("");
+    search_key.focus();
 });
