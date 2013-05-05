@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             show(cur_page + 1);
         }
     });
-    var last_key = null;
+    var last_key = '';
     var search_key = document.getElementById("search_key");
     var _search = function () {
         var key = search_key.value;
