@@ -1,9 +1,9 @@
 {
     "name": "Burstmarks",
-    "version": "0.1",
+    "version": "0.2",
     "description": "快速定位最近使用的、最近添加的书签。",
     "permissions": [
-        "tabs", "bookmarks", "history"
+        "tabs", "chrome://favicon/", "bookmarks", "history"
     ],
     "browser_action": {
         "default_icon": "icon.png",

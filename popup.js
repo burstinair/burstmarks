@@ -81,6 +81,9 @@ var show = function (page) {
         else
             res.push("'>");
         odd = !odd;
+        res.push("<img src='chrome://favicon/");
+        res.push(all_marks[i].url);
+        res.push("' />");
         res.push(all_marks[i].title);
         res.push("</a>");
     }
