@@ -11,74 +11,82 @@
                 color : #444;
                 font-family : 微软雅黑,黑体,宋体,arial;
                 overflow-x : hidden;
-                background : #fafafa;
+                /* background : #fafafa; */
+                background : #fff;
             }
             #search
             {
-                padding : 8px 15px;
-                background : #666;
+                padding : 8px 10px 5px 10px;
+                /*background : #666;*/
                 color : #eee;
                 font-weight : bold;
-                width : 390px;
+                width : 370px;
             }
             #search input
             {
-                width : 330px;
+                width : 360px;
                 height : 9px;
                 line-height : 9px;
                 font-size : 9px;
                 padding : 6px 5px;
-                border : 1px solid #ddd;
+                border : 1px solid #e5e5e5;
                 border-radius : 3px;
-                background : #fff;
+                background : #f8f8f8;
                 color : #222;
+                
+                outline : none;
             }
             #result
             {
-                padding : 5px 0;
-                background : f5f5f5;
-                width : 420px;
-            }
-            #result .tip
-            {
-                color : #666;
-                padding : 10px 15px;
+                padding : 0;
+                background : #f5f5f5;
+                width : 400px;
             }
             #result a, #result a:visited
             {
-                padding : 2px 15px;
+                padding : 3px 15px;
                 color : #421;
                 display : block;
                 text-decoration : none;
                 font-size : 13px;
                 line-height : 24px;
-                border-top : 1px solid #fafafa;
+                /*border-top : 1px solid #fafafa;
                 border-bottom : 1px solid #fafafa;
-                background : #fafafa;
+                 background : #fafafa; */
+                background : #fff;
                 
                 max-width : 390px;
                 white-space : nowrap;
                 overflow : hidden;
                 text-overflow : ellipsis;
+                
+                cursor : default;
             }
             #result a.odd
             {
-                background : #f8f8f8;
+                /*background : #f8f8f8;*/
             }
             #result a.select
             {
 				outline : none;
-                color : #921;
+                /* color : #921; 
                 border-top : 1px dotted #ddd;
-                border-bottom : 1px dotted #ddd;
-                background : #eee;
+                border-bottom : 1px dotted #ddd;*/
+                background : #efefef;
+            }
+            #result div.tip
+            {
+                background : #fff;
+                font-size : 14px;
+                padding : 10px;
             }
             #pager
             {
+                margin-top : 4px;
                 padding : 2px 10px;
                 background : #f2f2f2;
                 border : dotted 1px #ddd;
-                width : 400px;
+                width : 380px;
             }
             #pager a, #pager a.visited
             {
@@ -97,27 +105,15 @@
                 color : #666;
                 padding : 0 3px;
             }
-			#tip
-			{
-				padding : 5px 10px;
-				background : #f5f5f5;
-				color : #444;
-				font-size : 13px;
-				line-height : 20px;
-				width : 300px;
-				position : absolute;
-				display : none;
-			}
         </style>
         <script type="text/javascript" src="popup.js"></script>
     </head>
     <body>
         <div id="search">
-            搜索：<input id="search_key" />
+            <input id="search_key" />
         </div>
         <div id="result">
         </div>
-		<div id="tip"></div>
         <div id="pager">
              <span id="pager_info"></span>
              <a id="prev">上页</a>
