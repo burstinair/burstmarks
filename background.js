@@ -1,6 +1,25 @@
 var $b = chrome.bookmarks;
 var $h = chrome.history;
 
+var copy = function(str, mimetype) {
+    mimetype = mimetype || "text/plain";
+    var oriOnCopy = document.oncopy;
+    document.oncopy = function(event) {
+        event.clipboardData.setData(mimetype, str);
+        event.preventDefault();
+    };
+    document.execCommand("Copy", false, null);
+    document.oncopy = oriOnCopy;
+};
+chrome.contextMenus.create({
+    title: "复制链接地址",
+    contexts: ["link"],
+    documentUrlPatterns: ["chrome-extension://" + chrome.i18n.getMessage("@@extension_id") + "/popup.html"],
+    onclick: function (info, tab) {
+        copy(info.linkUrl);
+    }
+});
+
 var recent_count = 10;
 var value_base = 7 * 24 * 60 * 60 * 1000;
 
